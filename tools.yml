@@ -1,0 +1,73 @@
+python:
+  type: executable
+  check:
+    - python
+    - python3
+    - py
+  version_cmd:
+    - python3 --version
+    - python --version
+    - py --version
+
+kicad:
+  type: executable
+  check: kicad
+  version_cmd:
+    - kicad --version
+
+  install_modes:
+    full:
+      description: Full official KiCad installer
+      url: https://sourceforge.net/projects/kicad/files/6.0.11/kicad-6.0.11-x86_64.exe/download
+
+    esim_compressed:
+      description: Compressed KiCad optimized for eSim
+      repo_url:
+        windows: https://github.com/FOSSEE/kicad-installer-esim.git
+        linux: apt
+        mac: brew
+      branch: executables
+      requires:
+        - git
+        - 7z
+        - makensis
+
+
+nghdl:
+  type: executable
+  check: nghdl
+  version_cmd:
+    - nghdl --version
+  depends_on:
+    - ghdl
+    - ngspice
+    - verilator
+
+ghdl:
+  type: executable
+  check: ghdl
+  version_cmd:
+    - ghdl --version
+
+ngspice:
+  type: executable
+  check: ngspice
+  version_cmd:
+    - ngspice --version
+
+  install:
+    windows:
+      url: https://sourceforge.net/projects/ngspice/files/ng-spice-rework/45.2/ngspice-45.2_64.7z/download
+      extract: true
+      binary: ngspice/ngspice.exe
+
+    linux:
+      build_from_source: true
+      url: https://sourceforge.net/projects/ngspice/files/ng-spice-rework/45.2/ngspice-45.2.tar.gz
+
+verilator:
+  type: executable
+  check: verilator
+  version_cmd:
+    - verilator --version
+
