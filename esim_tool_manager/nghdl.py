@@ -4,6 +4,7 @@ import subprocess
 import platform
 from esim_tool_manager import ngspice
 
+
 # ---------------- OS DETECTION ----------------
 
 def get_os():
@@ -133,4 +134,3 @@ def install_nghdl():
 
 
 # ---------------- ENTRY POINT ----------------
-

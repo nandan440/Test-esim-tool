@@ -1,2 +1,0 @@
-[console_scripts]
-esim-tools = esim_tool_manager.cli:main

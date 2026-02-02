@@ -1,6 +1,15 @@
+
+.esim-tools-bin/
+# Python build artifacts
+build/
+dist/
+*.egg-info/
+
+# Python cache
 __pycache__/
 *.pyc
-*.pyo
+
+# Virtual env
+venv/
 .env
-.esim-tools-bin/
 

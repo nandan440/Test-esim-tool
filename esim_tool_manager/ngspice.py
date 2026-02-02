@@ -6,6 +6,7 @@ import tarfile
 import yaml
 import shutil
 import sys
+from .version import get_version 
 
 TOOLS_DIR = os.path.expanduser("~/esim-tools-bin")
 os.makedirs(TOOLS_DIR, exist_ok=True)
@@ -43,7 +44,8 @@ def download(url, output):
     print(f"Downloading: {url}")
     urllib.request.urlretrieve(url, output)
 
-
+def tool_exists(name):
+    return shutil.which(name) is not None
 
 # ---------------- NGSPICE INSTALL ----------------
 

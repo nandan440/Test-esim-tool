@@ -3,13 +3,14 @@ import subprocess
 import shutil
 import yaml
 import platform
-from .version import get_version 
+from esim_tool_manager.version import get_version
+
 
 TOOLS_DIR = os.path.expanduser("~/esim-tools-bin")
 os.makedirs(TOOLS_DIR, exist_ok=True)
 
 TOOLS_FILE = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "..", "tools.yml")
+    os.path.join(os.path.dirname(__file__), "tools.yml")
 )
 
 # ---------------- OS DETECTION ----------------
@@ -29,7 +30,7 @@ def get_os():
 
 def run(cmd):
     print(">>", cmd)
-    subprocess.run(cmd, shell=True, check=True)
+    subprocess.run(cmd, shell=isinstance(cmd, str), check=True)
 
 
 def load_tools():
@@ -71,6 +72,9 @@ def install_full_kicad(urls):
     # MAC
     elif os_type == "mac":
         print("Installing via Homebrew...")
+        if not tool_exists("brew"):
+            print("❌ Homebrew not found. Install brew first.")
+            return
         run("brew install --cask kicad")
 
     else:
