@@ -43,7 +43,7 @@ def main():
     # INSTALL COMMAND
     if args.command == "install":
         if not args.tool:
-            print("❌ Specify tool: ngspice / kicad / all")
+            print("❌ Specify tool: ngspice / kicad / nghdl/ all")
             return
 
         if args.tool == "all":
@@ -58,13 +58,24 @@ def main():
     # LIST TOOLS
     elif args.command == "help":
         show_help()
+
+    elif args.command == "update":
+            if not args.tool:
+               print("❌ Specify tool: <tool> or all")
+               return
+
+            if args.tool == "all":
+              installer.update_all()
+            else:
+             installer.update_tool(args.tool)
     
     # Run Doctor
     elif args.command == "doctor":
         dependency.run_doctor()
-    
+    # Version check 
     elif args.command == "version":
         show_version()
+
 
     else:
         print("❌ Unknown command")

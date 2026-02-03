@@ -8,6 +8,8 @@ python:
     - python3 --version
     - python --version
     - py --version
+  min_version: "3.10"
+  recommended_version: "3.13"
 
 kicad:
   type: executable
@@ -32,7 +34,6 @@ kicad:
         - 7z
         - makensis
 
-
 nghdl:
   type: executable
   check: nghdl
@@ -48,6 +49,8 @@ ghdl:
   check: ghdl
   version_cmd:
     - ghdl --version
+  min_version: "4.1.0"
+  recommended_version: "4.1.0"
 
 ngspice:
   type: executable
@@ -72,4 +75,5 @@ verilator:
   check: verilator
   version_cmd:
     - verilator --version
-
+  min_version: "4.210"
+  recommended_version: "4.210"
