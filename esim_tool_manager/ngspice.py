@@ -54,7 +54,7 @@ def install_ngspice():
     ngspice_cfg = tools["ngspice"]
     os_type = get_os()
 
-    # Check if already installed
+    # ---------------- Already installed ----------------
     if tool_exists("ngspice"):
         print("\n✅ Ngspice is already installed")
 
@@ -69,7 +69,7 @@ def install_ngspice():
 
     print("\n⚠️ Ngspice not found — installing...")
 
-    # WINDOWS INSTALL
+    # ---------------- WINDOWS ----------------
     if os_type == "windows":
         url = ngspice_cfg["install"]["windows"]["url"]
 
@@ -79,15 +79,21 @@ def install_ngspice():
         download(url, archive)
         os.makedirs(out_folder, exist_ok=True)
 
+        # 🔑 7z check
+        if not tool_exists("7z"):
+            print("❌ 7-Zip not found.")
+            print("👉 Install from: https://www.7-zip.org/")
+            print("👉 Make sure 7z is added to PATH.")
+            return
+
         run(f'7z x "{archive}" -o"{out_folder}"')
 
         print("\n✅ Ngspice installed at:", out_folder)
         print("👉 Add this to PATH:", out_folder)
 
-    # LINUX INSTALL
+    # ---------------- LINUX ----------------
     elif os_type == "linux":
         url = ngspice_cfg["install"]["linux"]["url"]
-
         archive = os.path.join(TOOLS_DIR, "ngspice.tar.gz")
 
         download(url, archive)
@@ -95,7 +101,16 @@ def install_ngspice():
         with tarfile.open(archive) as tar:
             tar.extractall(TOOLS_DIR)
 
-        src_dir = os.path.join(TOOLS_DIR, "ngspice-45.2")
+        # 🔑 find extracted folder dynamically
+        src_dir = None
+        for name in os.listdir(TOOLS_DIR):
+            if name.startswith("ngspice-") and os.path.isdir(os.path.join(TOOLS_DIR, name)):
+                src_dir = os.path.join(TOOLS_DIR, name)
+                break
+
+        if not src_dir:
+            print("❌ Failed to locate ngspice source directory")
+            return
 
         run(f"cd {src_dir} && ./configure")
         run(f"cd {src_dir} && make")
@@ -103,13 +118,17 @@ def install_ngspice():
 
         print("\n✅ Ngspice installed system-wide")
 
-    # MAC INSTALL
+    # ---------------- MAC ----------------
     elif os_type == "mac":
+        if not tool_exists("brew"):
+            print("❌ Homebrew not found.")
+            print("👉 Install from: https://brew.sh/")
+            return
+
         run("brew install ngspice")
 
     else:
         print("❌ Unsupported OS")
-
 
 
 
