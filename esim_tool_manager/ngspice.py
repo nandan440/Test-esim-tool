@@ -110,3 +110,6 @@ def install_ngspice():
     else:
         print("❌ Unsupported OS")
 
+
+
+

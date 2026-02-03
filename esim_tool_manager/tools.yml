@@ -54,6 +54,8 @@ ngspice:
   check: ngspice
   version_cmd:
     - ngspice --version
+  min_version: "45.0"
+  recommended_version: "45.2"
 
   install:
     windows:

@@ -1,6 +1,25 @@
 import argparse
+import importlib.metadata
 from esim_tool_manager import dependency
 from esim_tool_manager import installer
+
+
+def show_version():
+    version = importlib.metadata.version("esim-tools")
+    print(f"esim-tools v{version}")
+
+def show_help():
+    print("""
+esim-tools help
+
+Commands:
+  install <tool|all>     Install tools
+  uninstall <tool>       Uninstall tool
+  list                   List installed tools
+  doctor                 Check system & dependencies
+  version                Show tool manager version
+  update <tool|all>      Update tools
+""")
 
 
 def main():
@@ -9,8 +28,8 @@ def main():
     )
 
     parser.add_argument(
-        "command",
-        help="Command to run (install, list, check)"
+    "command",
+    help="Command to run (install, uninstall, list, doctor, update, help)"
     )
 
     parser.add_argument(
@@ -33,12 +52,19 @@ def main():
             installer.install_tool(args.tool)
 
     # CHECK DEPENDENCIES
-    elif args.command == "check":
+    elif args.command == "list":
         dependency.check_dependencies()
 
     # LIST TOOLS
-    elif args.command == "list":
-        print("Installed tools list coming soon")
+    elif args.command == "help":
+        show_help()
+    
+    # Run Doctor
+    elif args.command == "doctor":
+        dependency.run_doctor()
+    
+    elif args.command == "version":
+        show_version()
 
     else:
         print("❌ Unknown command")
