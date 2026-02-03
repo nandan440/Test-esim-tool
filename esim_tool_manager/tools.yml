@@ -8,8 +8,8 @@ python:
     - python3 --version
     - python --version
     - py --version
-  min_version: "3.10"
-  recommended_version: "3.13"
+  min_version: "3.9"
+  recommended_version: "3.13.1"
 
 kicad:
   type: executable

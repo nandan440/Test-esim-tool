@@ -1,0 +1,6 @@
+[project]
+name = "esim-tools-manager"
+version = "0.0.1
+dependencies = [
+    "packaging",
+]
