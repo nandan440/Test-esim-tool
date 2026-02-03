@@ -2,7 +2,7 @@ from .ngspice import install_ngspice
 from .kicad import install_kicad
 
 
-SUPPORTED_TOOLS = ["ngspice", "kicad"]
+SUPPORTED_TOOLS = ["ngspice", "kicad","nghdl"]
 
 
 def install_tool(tool_name):
