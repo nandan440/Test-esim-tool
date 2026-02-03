@@ -1,6 +1,6 @@
 from .ngspice import install_ngspice
 from .kicad import install_kicad
-
+from .nghdl import install_nghdl
 
 SUPPORTED_TOOLS = ["ngspice", "kicad","nghdl"]
 
@@ -20,6 +20,9 @@ def install_tool(tool_name):
 
     elif tool_name == "kicad":
         install_kicad()
+    
+    elif tool_name == "nghdl":
+        install_nghdl()
 
     print(f"✅ {tool_name} install complete")
 
