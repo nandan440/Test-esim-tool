@@ -5,7 +5,7 @@ from esim_tool_manager import installer
 
 
 def show_version():
-    version = importlib.metadata.version("esim-tools")
+    version = importlib.metadata.version("esim-tools-manager")
     print(f"esim-tools v{version}")
 
 def show_help():
