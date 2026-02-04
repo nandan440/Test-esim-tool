@@ -133,4 +133,3 @@ def install_nghdl():
         print("\n⚠️ Dependencies not installed. NGHDL may not work properly.")
 
 
-# ---------------- ENTRY POINT ----------------
